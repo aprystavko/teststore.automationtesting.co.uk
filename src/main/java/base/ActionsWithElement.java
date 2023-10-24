@@ -20,13 +20,13 @@ public class ActionsWithElement {
         return driver.findElement(By.cssSelector(buttonLocator)).isEnabled();
     }
 
-    public void clickOnCheckbox(String checkboxLocator) {
-        boolean checkboxStatus = isCheckboxSelected(checkboxLocator);
-        if (checkboxStatus) {
-            driver.findElement(By.cssSelector(checkboxLocator)).click();
-            System.out.println("Click on checkbox: " + checkboxLocator);
+    public void clickOnCheckbox(WebElement checkbox) {
+        boolean checkboxStatus = checkbox.isSelected();
+        if (!checkboxStatus) {
+            checkbox.click();
+            System.out.println("Click on checkbox: " + checkbox);
         } else {
-            System.out.println("Can't uncheck checkbox");
+            System.out.println("Can't click on checkbox");
         }
     }
 
@@ -40,27 +40,30 @@ public class ActionsWithElement {
         }
     }
 
-
-    public void selectMenuItem(String menuLocator, String menuItem) {
-        Select menuItems = new Select(driver.findElement(By.cssSelector(menuLocator)));
-        menuItems.selectByVisibleText(menuItem);
-        System.out.println("Menu item is selected: " + menuLocator + "with value: " + menuItem);
-        menuItems.getFirstSelectedOption();
-    }
-
     public void selectMenuItem(WebElement menu, String menuItem) {
         Select option = new Select(menu);
         option.selectByVisibleText(menuItem);
         System.out.println("Menu item is selected: " + menu + "with value: " + menuItem);
     }
 
-    public void clickOnRadioButton(String buttonLocator) {
-        boolean radioButtonStatus = driver.findElement(By.cssSelector(buttonLocator)).isDisplayed();
+    public void clickOnRadioButton(WebElement radioButton) {
+        boolean radioButtonStatus = radioButton.isEnabled();
         if (radioButtonStatus) {
-            driver.findElement(By.cssSelector(buttonLocator)).click();
-            System.out.println("Click on radio button: " + buttonLocator);
+            radioButton.click();
+            System.out.println("Click on radio button: " + radioButton);
         } else {
-            System.out.println("Can't click on clicked radio button: " + buttonLocator);
+            System.out.println("Can't click on clicked radio button: " + radioButton);
+        }
+    }
+
+    public void addValueToInput(WebElement input, String value) {
+        if (input.isDisplayed()) {
+            input.click();
+            input.clear();
+            input.sendKeys(value);
+            System.out.println("Added value: " + value + "into: " + input);
+        } else {
+            System.out.println("Can't add value: " + value + "into: " + input);
         }
     }
 

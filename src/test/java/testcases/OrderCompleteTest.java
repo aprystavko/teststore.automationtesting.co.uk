@@ -46,6 +46,22 @@ public class OrderCompleteTest extends BasePage {
         ShoppingCart cart = new ShoppingCart(driver);
         cart.addPromo("20OFF");
         cart.clickOnCheckoutBtn();
+
+        OrderFormPersInfo personalInfo = new OrderFormPersInfo(driver);
+        personalInfo.fillMandatoryFields("Mr", "John", "Smith", "test123@java.com");
+        personalInfo.sendDeliveryForm();
+
+        OrderFormDelivery orderDelivery = new OrderFormDelivery(driver);
+        orderDelivery.fillMandatoryFields("Soft", "55 Big Avenue", "BigCity", "Texas", "23232");
+        orderDelivery.sendAddressForm();
+
+        OrderFormShippingMethod shippingMethod = new OrderFormShippingMethod(driver);
+        shippingMethod.fillTextareaAndContinue("Lorem ipsum my delivery");
+
+        OrderFormPayment payment = new OrderFormPayment(driver);
+        payment.payByCheckAndContinue();
+        Thread.sleep(5000);
+
     }
 
 }

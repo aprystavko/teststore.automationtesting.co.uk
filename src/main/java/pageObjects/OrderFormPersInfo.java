@@ -1,6 +1,8 @@
 package pageObjects;
 
+import base.ActionsWithElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -17,7 +19,7 @@ public class OrderFormPersInfo {
     By birthDateField = By.cssSelector("input[name='birthday']");
     By receiveOffersCheckbox = By.cssSelector("div:nth-of-type(7)  span > label > span");
     By newsletterCheckbox = By.cssSelector("div:nth-of-type(8)  span > label > span");
-    By termsConditionsCheckbox = By.cssSelector("input[name='psgdpr']");
+    By termsConditionsCheckbox = By.cssSelector(".custom-checkbox input[name='psgdpr']");
     By continueBtn = By.cssSelector("form#customer-form  button[name='continue']");
 
     public OrderFormPersInfo(WebDriver driver) {
@@ -64,8 +66,27 @@ public class OrderFormPersInfo {
         return driver.findElement(termsConditionsCheckbox);
     }
 
+    ActionsWithElement actions = new ActionsWithElement();
+
     public WebElement getContinueBtn() {
         return driver.findElement(continueBtn);
+    }
+
+    public void fillMandatoryFields(String socialTitle, String firstName, String lastName, String email) {
+        if (socialTitle.equals("Mr")) {
+            actions.clickOnRadioButton(getGenderMr());
+        } else {
+            actions.clickOnRadioButton(getGenderMrs());
+        }
+        actions.addValueToInput(getFirstNameField(), firstName);
+        actions.addValueToInput(getLastnameField(), lastName);
+        actions.addValueToInput(getEmailField(), email);
+    }
+
+    public void sendDeliveryForm() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", getTermsConditionsCheckbox());
+        actions.clickOnCheckbox(getTermsConditionsCheckbox());
+        actions.clickOnElement(getContinueBtn());
     }
 
 }

@@ -1,5 +1,6 @@
 package pageObjects;
 
+import base.ActionsWithElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,4 +34,11 @@ public class OrderFormPayment {
         return driver.findElement(orderBtn);
     }
 
+    ActionsWithElement actions = new ActionsWithElement();
+
+    public void payByCheckAndContinue() {
+        actions.clickOnRadioButton(getPayByCheckRadioBtn());
+        actions.clickOnCheckbox(getTermsConditionsCheckbox());
+        actions.clickOnElement(getOrderBtn());
+    }
 }

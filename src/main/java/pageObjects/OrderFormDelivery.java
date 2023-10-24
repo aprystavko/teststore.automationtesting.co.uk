@@ -1,6 +1,8 @@
 package pageObjects;
 
+import base.ActionsWithElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -73,4 +75,17 @@ public class OrderFormDelivery {
         return driver.findElement(continueBtn);
     }
 
+    ActionsWithElement actions = new ActionsWithElement();
+
+    public void fillMandatoryFields(String company, String address, String city, String state, String postCode) {
+        actions.addValueToInput(getCompanyField(), company);
+        actions.addValueToInput(getAddressField(), address);
+        actions.addValueToInput(getCityField(), city);
+        actions.selectMenuItem(getStateDropdown(), state);
+        actions.addValueToInput(getPostcodeField(), postCode);
+    }
+
+    public void sendAddressForm() {
+        actions.clickOnElement(getContinueBtn());
+    }
 }
