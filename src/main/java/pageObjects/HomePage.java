@@ -1,6 +1,8 @@
 package pageObjects;
 
+import base.ActionsWithElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -119,6 +121,21 @@ public class HomePage {
     public WebElement getCookie() throws IOException {
         return driver.findElement(cookie);
     }
+
+    ActionsWithElement actions = new ActionsWithElement();
+
+    public void closeCookie() throws IOException {
+        actions.clickOnElement(getCookie());
+    }
+
+    public void openTestStore() throws IOException {
+        closeCookie();
+        actions.clickOnElement(getToggle());
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", getTestStoreLink());
+        getTestStoreLink().click();
+
+    }
+
 
 }
 

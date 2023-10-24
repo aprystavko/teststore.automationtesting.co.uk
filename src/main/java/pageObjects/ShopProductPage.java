@@ -1,5 +1,6 @@
 package pageObjects;
 
+import base.ActionsWithElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,6 +8,7 @@ import org.openqa.selenium.WebElement;
 public class ShopProductPage {
 
     public WebDriver driver;
+    ActionsWithElement actions = new ActionsWithElement();
 
     By sizeOption = By.cssSelector("[data-product-attribute='1']");
     By quantityIncrease = By.cssSelector(".touchspin-up");
@@ -38,4 +40,15 @@ public class ShopProductPage {
         return driver.findElement(homepageLink);
     }
 
+    public void increaseProductQuanty(){
+        actions.clickOnElement(getQuantIncrease());
+    }
+
+    public void selectSizeOption(String sizeOption){
+        actions.selectMenuItem(getSizeOption(), sizeOption);
+    }
+
+    public void addToCart(){
+        actions.clickOnElement(getAddToCartBtn());
+    }
 }

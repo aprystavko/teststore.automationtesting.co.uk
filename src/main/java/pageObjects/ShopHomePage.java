@@ -1,10 +1,14 @@
 package pageObjects;
 
+import base.ActionsWithElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class ShopHomepage {
+import java.io.IOException;
+
+public class ShopHomePage {
 
     public WebDriver driver;
 
@@ -17,7 +21,7 @@ public class ShopHomepage {
     By productSeven = By.linkText("Mug The Adventure Begins");
     By productEight = By.linkText("Mug Today Is A Good Day");
 
-    public ShopHomepage(WebDriver driver) {
+    public ShopHomePage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -51,6 +55,13 @@ public class ShopHomepage {
 
     public WebElement getProdEight() {
         return driver.findElement(productEight);
+    }
+
+    ActionsWithElement actions = new ActionsWithElement();
+
+    public void openProdOne() throws IOException {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", getProdOne());
+        actions.clickOnElement(getProdOne());
     }
 }
 

@@ -1,5 +1,6 @@
 package pageObjects;
 
+import base.ActionsWithElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,8 +10,8 @@ public class ShoppingCart {
     public WebDriver driver;
 
     By havePromo = By.cssSelector(".promo-code-button .collapse-button");
-    By promoTextbox = By.cssSelector("input[name='discount_name']");
-    By promoAddBtn = By.cssSelector("form[method='post']  span");
+    By promoTextBox = By.cssSelector("input[name='discount_name']");
+    By promoAddBtn = By.cssSelector(".promo-code button");
     By proceedToCheckoutBtn = By.cssSelector(".cart-detailed-actions .btn-primary");
     By deleteItemOne = By.cssSelector(".cart-items .cart-item:nth-of-type(1) .float-xs-left");
     By deleteItemTwo = By.cssSelector(".cart-items .cart-item:nth-of-type(2) .float-xs-left");
@@ -24,8 +25,8 @@ public class ShoppingCart {
         return driver.findElement(havePromo);
     }
 
-    public WebElement getPromoTextbox() {
-        return driver.findElement(promoTextbox);
+    public WebElement getPromoTextBox() {
+        return driver.findElement(promoTextBox);
     }
 
     public WebElement getPromoAddBtn() {
@@ -46,6 +47,19 @@ public class ShoppingCart {
 
     public WebElement getTotalAmount() {
         return driver.findElement(totalValue);
+    }
+
+    ActionsWithElement actions = new ActionsWithElement();
+
+    public void addPromo(String promoCode) throws InterruptedException {
+        actions.clickOnElement(getHavePromo());
+        getPromoTextBox().clear();
+        getPromoTextBox().sendKeys(promoCode);
+        actions.clickOnElement(getPromoAddBtn());
+    }
+
+    public void clickOnCheckoutBtn() {
+        actions.clickOnElement(getProceedCheckoutBtn());
     }
 
 }

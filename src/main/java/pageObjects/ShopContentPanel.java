@@ -1,5 +1,6 @@
 package pageObjects;
 
+import base.ActionsWithElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,9 +8,10 @@ import org.openqa.selenium.WebElement;
 public class ShopContentPanel {
 
     public WebDriver driver;
+    ActionsWithElement actions = new ActionsWithElement();
 
     By continueShoppingBtn = By.xpath("//button[contains(text(), 'Continue')]");
-    By checkoutBtn = By.linkText("PROCEED TO CHECKOUT");
+    By checkoutBtn = By.linkText("\uE876PROCEED TO CHECKOUT");
 
     public ShopContentPanel(WebDriver driver) {
         this.driver = driver;
@@ -23,4 +25,7 @@ public class ShopContentPanel {
         return driver.findElement(checkoutBtn);
     }
 
+    public void clickOnProceedToCheckout(){
+        actions.clickOnElement(getCheckoutBtn());
+    }
 }
