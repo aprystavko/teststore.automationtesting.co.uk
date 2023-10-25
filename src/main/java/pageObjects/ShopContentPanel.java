@@ -10,7 +10,7 @@ public class ShopContentPanel {
     public WebDriver driver;
     ActionsWithElement actions = new ActionsWithElement();
 
-    By continueShoppingBtn = By.xpath("//button[contains(text(), 'Continue')]");
+    By continueShoppingBtn = By.cssSelector(".btn.btn-secondary");
     By checkoutBtn = By.linkText("\uE876PROCEED TO CHECKOUT");
 
     public ShopContentPanel(WebDriver driver) {
@@ -25,7 +25,12 @@ public class ShopContentPanel {
         return driver.findElement(checkoutBtn);
     }
 
-    public void clickOnProceedToCheckout(){
+    public void clickOnProceedToCheckout() {
         actions.clickOnElement(getCheckoutBtn());
     }
+
+    public void clickOnContinueShopping() {
+        getContinueShopBtn().click();
+    }
+
 }

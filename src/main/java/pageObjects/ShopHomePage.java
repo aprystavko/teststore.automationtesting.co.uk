@@ -59,9 +59,14 @@ public class ShopHomePage {
 
     ActionsWithElement actions = new ActionsWithElement();
 
-    public void openProdOne() throws IOException {
+    public void openProdOne() {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", getProdOne());
         actions.clickOnElement(getProdOne());
+    }
+
+    public void openProdTwo() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", getProdTwo());
+        actions.clickOnElement(getProdTwo());
     }
 }
 

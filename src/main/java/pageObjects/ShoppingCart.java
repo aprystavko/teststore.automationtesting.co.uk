@@ -4,10 +4,14 @@ import base.ActionsWithElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ShoppingCart {
 
     public WebDriver driver;
+    WebDriverWait wait;
 
     By havePromo = By.cssSelector(".promo-code-button .collapse-button");
     By promoTextBox = By.cssSelector("input[name='discount_name']");
@@ -16,9 +20,11 @@ public class ShoppingCart {
     By deleteItemOne = By.cssSelector(".cart-items .cart-item:nth-of-type(1) .float-xs-left");
     By deleteItemTwo = By.cssSelector(".cart-items .cart-item:nth-of-type(2) .float-xs-left");
     By totalValue = By.cssSelector(".cart-total .value");
+    By clickOnHome = By.cssSelector("ol > li:nth-of-type(1) > a > span");
 
     public ShoppingCart(WebDriver driver) {
         this.driver = driver;
+        this.wait = wait;
     }
 
     public WebElement getHavePromo() {
@@ -49,6 +55,10 @@ public class ShoppingCart {
         return driver.findElement(totalValue);
     }
 
+    public WebElement getClickOnHome() {
+        return driver.findElement(clickOnHome);
+    }
+
     ActionsWithElement actions = new ActionsWithElement();
 
     public void addPromo(String promoCode) throws InterruptedException {
@@ -62,4 +72,15 @@ public class ShoppingCart {
         actions.clickOnElement(getProceedCheckoutBtn());
     }
 
+    public void deleteProductTwo() {
+        actions.clickOnElement(getDeleteItemTwo());
+    }
+
+
+
+    public String getTotalAmountText(){
+        wait = new WebDriverWait(driver, 120);
+        wait.until(ExpectedConditions.invisibilityOf(getTotalAmount()));
+        return getTotalAmount().getText();
+    }
 }

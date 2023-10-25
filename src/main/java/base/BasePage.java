@@ -14,6 +14,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -34,6 +36,14 @@ public class BasePage {
         if (prop.getProperty("browser").equals("chrome")) {
             System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
             options.addArguments("--start-maximized");
+
+            options.addArguments("--disable-web-security");
+            options.addArguments("--no-proxy-server");
+            Map<String, Object> prefs = new HashMap<String, Object>();
+            prefs.put("credentials_enable_service", false);
+            prefs.put("profile.password_manager_enabled", false);
+            options.setExperimentalOption("prefs", prefs);
+
             options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
             driver = new ChromeDriver(options);
         } else if (prop.getProperty("browser").equals("firefox")) {

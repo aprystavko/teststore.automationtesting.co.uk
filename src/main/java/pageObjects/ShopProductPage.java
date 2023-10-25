@@ -24,11 +24,11 @@ public class ShopProductPage {
         return driver.findElement(sizeOption);
     }
 
-    public WebElement getQuantIncrease() {
+    public WebElement getQuantityIncrease() {
         return driver.findElement(quantityIncrease);
     }
 
-    public WebElement getQuantDecrease() {
+    public WebElement getQuantityDecrease() {
         return driver.findElement(quantityDecrease);
     }
 
@@ -40,8 +40,8 @@ public class ShopProductPage {
         return driver.findElement(homepageLink);
     }
 
-    public void increaseProductQuanty(){
-        actions.clickOnElement(getQuantIncrease());
+    public void increaseProductQuantity(){
+        actions.clickOnElement(getQuantityIncrease());
     }
 
     public void selectSizeOption(String sizeOption){
@@ -50,5 +50,9 @@ public class ShopProductPage {
 
     public void addToCart(){
         actions.clickOnElement(getAddToCartBtn());
+    }
+
+    public void clickOnHome(){
+        getHomepageLink().click();
     }
 }

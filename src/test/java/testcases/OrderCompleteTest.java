@@ -18,7 +18,6 @@ public class OrderCompleteTest extends BasePage {
     public void setup() throws IOException {
         driver = getDriver();
         driver.get(getUrl());
-        HomePage home = new HomePage(driver);
     }
 
     @AfterTest
@@ -36,7 +35,7 @@ public class OrderCompleteTest extends BasePage {
         shopHome.openProdOne();
 
         ShopProductPage shopProduct = new ShopProductPage(driver);
-        shopProduct.increaseProductQuanty();
+        shopProduct.increaseProductQuantity();
         shopProduct.selectSizeOption("XL");
         shopProduct.addToCart();
 
