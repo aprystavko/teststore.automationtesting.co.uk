@@ -4,14 +4,10 @@ import base.ActionsWithElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ShoppingCart {
 
     public WebDriver driver;
-    WebDriverWait wait;
 
     By havePromo = By.cssSelector(".promo-code-button .collapse-button");
     By promoTextBox = By.cssSelector("input[name='discount_name']");
@@ -24,7 +20,6 @@ public class ShoppingCart {
 
     public ShoppingCart(WebDriver driver) {
         this.driver = driver;
-        this.wait = wait;
     }
 
     public WebElement getHavePromo() {
@@ -76,11 +71,7 @@ public class ShoppingCart {
         actions.clickOnElement(getDeleteItemTwo());
     }
 
-
-
-    public String getTotalAmountText(){
-        wait = new WebDriverWait(driver, 120);
-        wait.until(ExpectedConditions.invisibilityOf(getTotalAmount()));
+    public String getTotalAmountText() {
         return getTotalAmount().getText();
     }
 }

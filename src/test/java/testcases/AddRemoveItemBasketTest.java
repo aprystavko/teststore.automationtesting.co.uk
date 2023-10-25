@@ -1,6 +1,9 @@
 package testcases;
 
 import base.BasePage;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -54,6 +57,9 @@ public class AddRemoveItemBasketTest extends BasePage {
         shoppingCart.deleteProductTwo();
 
         System.out.println(shoppingCart.getTotalAmountText());
+        WebDriverWait wait = new WebDriverWait(driver, 120);
+        wait.until(ExpectedConditions.invisibilityOf(shoppingCart.getDeleteItemTwo()));
+        Assert.assertEquals(shoppingCart.getTotalAmountText(), "$45.24");
     }
 
 }
