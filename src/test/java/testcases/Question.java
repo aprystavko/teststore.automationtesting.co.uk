@@ -19,9 +19,9 @@ public class Question {
         ChromeOptions options = new ChromeOptions();
         System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
         options.addArguments("--start-maximized");
-
         options.addArguments("--disable-web-security");
         options.addArguments("--no-proxy-server");
+
         Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("credentials_enable_service", false);
         prefs.put("profile.password_manager_enabled", false);

@@ -1,6 +1,7 @@
 package testcases;
 
 import base.BasePage;
+import base.Hooks;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
@@ -11,56 +12,56 @@ import java.io.IOException;
 
 @Listeners(base.Listeners.class)
 
-public class OrderCompleteTest extends BasePage {
+public class OrderCompleteTest extends Hooks {
 
     public OrderCompleteTest() throws IOException {
         super();
     }
 
-    @BeforeTest
-    public void setup() throws IOException {
-        driver = getDriver();
-        driver.get(getUrl());
-    }
-
-    @AfterTest
-    public void tearDown() {
-        driver.close();
-        driver = null;
-    }
+//    @BeforeTest
+//    public void setup() throws IOException {
+//        driver = getDriver();
+//        driver.get(getUrl());
+//    }
+//
+//    @AfterTest
+//    public void tearDown() {
+//        driver.close();
+//        driver = null;
+//    }
 
     @Test
     public void endToEndTest() throws IOException, InterruptedException {
-        HomePage home = new HomePage(driver);
+        HomePage home = new HomePage();
         home.openTestStore();
 
-        ShopHomePage shopHome = new ShopHomePage(driver);
+        ShopHomePage shopHome = new ShopHomePage();
         shopHome.openProdOne();
 
-        ShopProductPage shopProduct = new ShopProductPage(driver);
+        ShopProductPage shopProduct = new ShopProductPage();
         shopProduct.increaseProductQuantity();
         shopProduct.selectSizeOption("XL");
         shopProduct.addToCart();
 
-        ShopContentPanel contentPanel = new ShopContentPanel(driver);
+        ShopContentPanel contentPanel = new ShopContentPanel();
         contentPanel.clickOnProceedToCheckout();
 
-        ShoppingCart cart = new ShoppingCart(driver);
+        ShoppingCart cart = new ShoppingCart();
         cart.addPromo("20OFF");
         cart.clickOnCheckoutBtn();
 
-        OrderFormPersInfo personalInfo = new OrderFormPersInfo(driver);
+        OrderFormPersInfo personalInfo = new OrderFormPersInfo();
         personalInfo.fillMandatoryFields("Mr", "John", "Smith", "test123@java.com");
         personalInfo.sendDeliveryForm();
 
-        OrderFormDelivery orderDelivery = new OrderFormDelivery(driver);
+        OrderFormDelivery orderDelivery = new OrderFormDelivery();
         orderDelivery.fillMandatoryFields("Soft", "55 Big Avenue", "BigCity", "Texas", "23232");
         orderDelivery.sendAddressForm();
 
-        OrderFormShippingMethod shippingMethod = new OrderFormShippingMethod(driver);
+        OrderFormShippingMethod shippingMethod = new OrderFormShippingMethod();
         shippingMethod.fillTextareaAndContinue("Lorem ipsum my delivery");
 
-        OrderFormPayment payment = new OrderFormPayment(driver);
+        OrderFormPayment payment = new OrderFormPayment();
         payment.payByCheckAndContinue();
         Thread.sleep(5000);
 

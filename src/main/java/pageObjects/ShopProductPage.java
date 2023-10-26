@@ -1,11 +1,14 @@
 package pageObjects;
 
 import base.ActionsWithElement;
+import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class ShopProductPage {
+import java.io.IOException;
+
+public class ShopProductPage extends BasePage {
 
     public WebDriver driver;
     ActionsWithElement actions = new ActionsWithElement();
@@ -16,43 +19,51 @@ public class ShopProductPage {
     By addToCartBtn = By.cssSelector(".add-to-cart.btn.btn-primary");
     By homepageLink = By.xpath("//span[.='Home']");
 
-    public ShopProductPage(WebDriver driver) {
-        this.driver = driver;
+    public ShopProductPage() throws IOException {
+        super();
     }
 
     public WebElement getSizeOption() {
+        this.driver = getDriver();
         return driver.findElement(sizeOption);
     }
 
     public WebElement getQuantityIncrease() {
+        this.driver = getDriver();
         return driver.findElement(quantityIncrease);
     }
 
     public WebElement getQuantityDecrease() {
+        this.driver = getDriver();
         return driver.findElement(quantityDecrease);
     }
 
     public WebElement getAddToCartBtn() {
+        this.driver = getDriver();
         return driver.findElement(addToCartBtn);
     }
 
     public WebElement getHomepageLink() {
+        this.driver = getDriver();
         return driver.findElement(homepageLink);
     }
 
-    public void increaseProductQuantity(){
+    public void increaseProductQuantity() {
+        this.driver = getDriver();
         actions.clickOnElement(getQuantityIncrease());
     }
 
-    public void selectSizeOption(String sizeOption){
+    public void selectSizeOption(String sizeOption) {
+        this.driver = getDriver();
         actions.selectMenuItem(getSizeOption(), sizeOption);
     }
 
-    public void addToCart(){
+    public void addToCart() {
+        this.driver = getDriver();
         actions.clickOnElement(getAddToCartBtn());
     }
 
-    public void clickOnHome(){
+    public void clickOnHome() {
         getHomepageLink().click();
     }
 }

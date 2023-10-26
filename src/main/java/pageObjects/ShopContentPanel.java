@@ -1,11 +1,14 @@
 package pageObjects;
 
 import base.ActionsWithElement;
+import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class ShopContentPanel {
+import java.io.IOException;
+
+public class ShopContentPanel extends BasePage {
 
     public WebDriver driver;
     ActionsWithElement actions = new ActionsWithElement();
@@ -13,15 +16,17 @@ public class ShopContentPanel {
     By continueShoppingBtn = By.cssSelector(".btn.btn-secondary");
     By checkoutBtn = By.linkText("\uE876PROCEED TO CHECKOUT");
 
-    public ShopContentPanel(WebDriver driver) {
-        this.driver = driver;
+    public ShopContentPanel() throws IOException {
+        super();
     }
 
     public WebElement getContinueShopBtn() {
+        this.driver = getDriver();
         return driver.findElement(continueShoppingBtn);
     }
 
     public WebElement getCheckoutBtn() {
+        this.driver = getDriver();
         return driver.findElement(checkoutBtn);
     }
 

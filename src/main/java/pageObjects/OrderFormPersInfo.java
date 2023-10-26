@@ -1,12 +1,15 @@
 package pageObjects;
 
 import base.ActionsWithElement;
+import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class OrderFormPersInfo {
+import java.io.IOException;
+
+public class OrderFormPersInfo extends BasePage {
 
     public WebDriver driver;
 
@@ -22,47 +25,57 @@ public class OrderFormPersInfo {
     By termsConditionsCheckbox = By.cssSelector(".custom-checkbox input[name='psgdpr']");
     By continueBtn = By.cssSelector("form#customer-form  button[name='continue']");
 
-    public OrderFormPersInfo(WebDriver driver) {
-        this.driver = driver;
+    public OrderFormPersInfo() throws IOException {
+        super();
     }
 
     public WebElement getGenderMr() {
+        this.driver = getDriver();
         return driver.findElement(genderMr);
     }
 
     public WebElement getGenderMrs() {
+        this.driver = getDriver();
         return driver.findElement(genderMrs);
     }
 
     public WebElement getFirstNameField() {
+        this.driver = getDriver();
         return driver.findElement(firstNameField);
     }
 
     public WebElement getLastnameField() {
+        this.driver = getDriver();
         return driver.findElement(lastNameField);
     }
 
     public WebElement getEmailField() {
+        this.driver = getDriver();
         return driver.findElement(emailField);
     }
 
     public WebElement getPasswordField() {
+        this.driver = getDriver();
         return driver.findElement(passwordField);
     }
 
     public WebElement getBirthDateField() {
+        this.driver = getDriver();
         return driver.findElement(birthDateField);
     }
 
     public WebElement getRecOfferCheckbox() {
+        this.driver = getDriver();
         return driver.findElement(receiveOffersCheckbox);
     }
 
     public WebElement getNewsletterCheckbox() {
+        this.driver = getDriver();
         return driver.findElement(newsletterCheckbox);
     }
 
     public WebElement getTermsConditionsCheckbox() {
+        this.driver = getDriver();
         return driver.findElement(termsConditionsCheckbox);
     }
 

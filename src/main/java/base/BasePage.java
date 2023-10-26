@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,7 +20,6 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class BasePage {
-    public WebDriver driver;
     private String url;
     private Properties prop;
     private ChromeOptions options = new ChromeOptions();
@@ -30,32 +31,8 @@ public class BasePage {
         prop.load(data);
     }
 
-    public WebDriver getDriver() {
-        if (prop.getProperty("browser").equals("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-            options.addArguments("--start-maximized");
-
-            options.addArguments("--disable-web-security");
-            options.addArguments("--no-proxy-server");
-
-            Map<String, Object> prefs = new HashMap<String, Object>();
-            prefs.put("credentials_enable_service", false);
-            prefs.put("profile.password_manager_enabled", false);
-            options.setExperimentalOption("prefs", prefs);
-
-            options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-
-            driver = new ChromeDriver(options);
-        } else if (prop.getProperty("browser").equals("firefox")) {
-            System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
-            driver = new FirefoxDriver();
-        } else {
-            System.setProperty("webdriver.edge.driver", "drivers/msedgedriver.exe");
-            driver = new EdgeDriver();
-        }
-
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        return driver;
+    public static WebDriver getDriver() {
+        return WebDriverInstance.getDriver();
     }
 
     public String getUrl() {
@@ -64,8 +41,8 @@ public class BasePage {
     }
 
     public void takeSnapShot(String name) throws IOException {
-        if (driver != null) {
-            File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        if (getDriver() != null) {
+            File srcFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
             File destFile = new File("./logs/screenshots/" + timestamp() + ".png");
             FileUtils.copyFile(srcFile, destFile);
         }
@@ -78,9 +55,15 @@ public class BasePage {
     Utils utils = new Utils();
 
     public void addBorderToElement(WebElement element) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
         String elem = utils.getStringWebElement(element);
         js.executeScript("document.querySelector(\"" + elem + "\").style.border = \"thick solid #df3079\";");
+    }
+
+    public void waitForElementInvisible(WebElement element, int timer){
+        WebDriverWait wait = new WebDriverWait(getDriver(), timer);
+        wait.until(ExpectedConditions.invisibilityOf(element));
+
     }
 
 }

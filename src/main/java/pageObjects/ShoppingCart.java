@@ -1,16 +1,18 @@
 package pageObjects;
 
 import base.ActionsWithElement;
+import base.BasePage;
 import base.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ShoppingCart {
+public class ShoppingCart extends BasePage {
 
     public WebDriver driver;
 
@@ -23,39 +25,47 @@ public class ShoppingCart {
     By totalValue = By.cssSelector(".cart-total .value");
     By clickOnHome = By.cssSelector("ol > li:nth-of-type(1) > a > span");
 
-    public ShoppingCart(WebDriver driver) {
-        this.driver = driver;
+    public ShoppingCart() throws IOException {
+        super();
     }
 
     public WebElement getHavePromo() {
+        this.driver = getDriver();
         return driver.findElement(havePromo);
     }
 
     public WebElement getPromoTextBox() {
+        this.driver = getDriver();
         return driver.findElement(promoTextBox);
     }
 
     public WebElement getPromoAddBtn() {
+        this.driver = getDriver();
         return driver.findElement(promoAddBtn);
     }
 
     public WebElement getProceedCheckoutBtn() {
+        this.driver = getDriver();
         return driver.findElement(proceedToCheckoutBtn);
     }
 
     public WebElement getDeleteItemOne() {
+        this.driver = getDriver();
         return driver.findElement(deleteItemOne);
     }
 
     public WebElement getDeleteItemTwo() {
+        this.driver = getDriver();
         return driver.findElement(deleteItemTwo);
     }
 
     public WebElement getTotalAmount() {
+        this.driver = getDriver();
         return driver.findElement(totalValue);
     }
 
     public WebElement getClickOnHome() {
+        this.driver = getDriver();
         return driver.findElement(clickOnHome);
     }
 

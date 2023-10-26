@@ -1,12 +1,14 @@
 package pageObjects;
 
 import base.ActionsWithElement;
+import base.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class OrderFormDelivery {
+import java.io.IOException;
+
+public class OrderFormDelivery extends BasePage {
 
     public WebDriver driver;
 
@@ -20,58 +22,70 @@ public class OrderFormDelivery {
     By postcodeField = By.cssSelector("input[name='postcode']");
     By countryDropdown = By.cssSelector("select[name='id_country']");
     By phoneField = By.cssSelector("input[name='phone']");
-    By invoiceSameAddCheckboc = By.cssSelector("input#use_same_address");
+    By invoiceSameAddCheckbox = By.cssSelector("input#use_same_address");
     By continueBtn = By.cssSelector("button[name='confirm-addresses']");
 
-    public OrderFormDelivery(WebDriver driver) {
-        this.driver = driver;
+    public OrderFormDelivery() throws IOException {
+        super();
     }
 
     public WebElement getFirstNameField() {
+        this.driver = getDriver();
         return driver.findElement(firstNameField);
     }
 
     public WebElement getLastnameField() {
+        this.driver = getDriver();
         return driver.findElement(lastNameField);
     }
 
     public WebElement getCompanyField() {
+        this.driver = getDriver();
         return driver.findElement(companyNameField);
     }
 
     public WebElement getAddressField() {
+        this.driver = getDriver();
         return driver.findElement(addressField);
     }
 
     public WebElement getAddressCompField() {
+        this.driver = getDriver();
         return driver.findElement(addressComplementField);
     }
 
     public WebElement getCityField() {
+        this.driver = getDriver();
         return driver.findElement(cityField);
     }
 
     public WebElement getStateDropdown() {
+        this.driver = getDriver();
         return driver.findElement(stateDropdown);
     }
 
     public WebElement getPostcodeField() {
+        this.driver = getDriver();
         return driver.findElement(postcodeField);
     }
 
     public WebElement getCountryDropdown() {
+        this.driver = getDriver();
         return driver.findElement(countryDropdown);
     }
 
     public WebElement getPhoneField() {
+        this.driver = getDriver();
         return driver.findElement(phoneField);
     }
 
     public WebElement getInvoiceSameAddCheckbox() {
-        return driver.findElement(invoiceSameAddCheckboc);
+        this.driver = getDriver();
+        return driver.findElement(invoiceSameAddCheckbox);
     }
 
     public WebElement getContinueBtn() {
+        this.driver = getDriver();
         return driver.findElement(continueBtn);
     }
 
@@ -88,4 +102,6 @@ public class OrderFormDelivery {
     public void sendAddressForm() {
         actions.clickOnElement(getContinueBtn());
     }
+
 }
+
