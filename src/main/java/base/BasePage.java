@@ -1,9 +1,7 @@
 package base;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -39,12 +37,14 @@ public class BasePage {
 
             options.addArguments("--disable-web-security");
             options.addArguments("--no-proxy-server");
+
             Map<String, Object> prefs = new HashMap<String, Object>();
             prefs.put("credentials_enable_service", false);
             prefs.put("profile.password_manager_enabled", false);
             options.setExperimentalOption("prefs", prefs);
 
             options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+
             driver = new ChromeDriver(options);
         } else if (prop.getProperty("browser").equals("firefox")) {
             System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
@@ -55,7 +55,6 @@ public class BasePage {
         }
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         return driver;
     }
 
@@ -75,4 +74,13 @@ public class BasePage {
     public String timestamp() {
         return new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date());
     }
+
+    Utils utils = new Utils();
+
+    public void addBorderToElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String elem = utils.getStringWebElement(element);
+        js.executeScript("document.querySelector(\"" + elem + "\").style.border = \"thick solid #df3079\";");
+    }
+
 }

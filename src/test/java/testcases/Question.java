@@ -31,11 +31,12 @@ public class Question {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("http://teststore.automationtesting.co.uk/login?back=my-account");
+        driver.manage().deleteAllCookies();
     }
 
     @Test
     public void signIn() throws InterruptedException {
-        driver.findElement(By.cssSelector("section input[name='email']")).sendKeys("test@test.com");
+        driver.findElement(By.cssSelector("section input[name='email']")).sendKeys("test11@test11.com");
         driver.findElement(By.cssSelector("[name='password']")).sendKeys("test123");
         driver.findElement(By.cssSelector("button#submit-login")).click();
         Thread.sleep(2000);

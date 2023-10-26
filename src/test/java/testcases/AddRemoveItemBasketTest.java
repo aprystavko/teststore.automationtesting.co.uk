@@ -1,19 +1,16 @@
 package testcases;
 
 import base.BasePage;
+import base.Utils;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageObjects.*;
 
 import java.io.IOException;
 
 @Listeners(base.Listeners.class)
-
 public class AddRemoveItemBasketTest extends BasePage {
 
     public AddRemoveItemBasketTest() throws IOException {
@@ -27,16 +24,10 @@ public class AddRemoveItemBasketTest extends BasePage {
     }
 
     @AfterTest
-    public void afterTest() {
+    public void tearDown() {
         if (driver != null) {
-            try {
-                takeSnapShot("Test_Failure_Screenshot");
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                driver.quit();
-                driver = null;
-            }
+            driver.close();
+            driver = null;
         }
     }
 
@@ -67,10 +58,10 @@ public class AddRemoveItemBasketTest extends BasePage {
         ShoppingCart shoppingCart = new ShoppingCart(driver);
         shoppingCart.deleteProductTwo();
 
-        System.out.println(shoppingCart.getTotalAmountText());
         WebDriverWait wait = new WebDriverWait(driver, 120);
         wait.until(ExpectedConditions.invisibilityOf(shoppingCart.getDeleteItemTwo()));
-        Assert.assertEquals(shoppingCart.getTotalAmountText(), "$45.214");
+        addBorderToElement(shoppingCart.getTotalAmount());
+        Assert.assertEquals(shoppingCart.getTotalAmountText(), "$45.25");
     }
 
 }
