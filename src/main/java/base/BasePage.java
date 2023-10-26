@@ -64,19 +64,15 @@ public class BasePage {
         return url;
     }
 
-    public static void takeSnapShot(WebDriver driver) {
-        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        File destFile = new File("./logs/screenshots/" + timestamp() + ".png");
-        try {
+    public void takeSnapShot(String name) throws IOException {
+        if (driver != null) {
+            File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File destFile = new File("./logs/screenshots/" + timestamp() + ".png");
             FileUtils.copyFile(srcFile, destFile);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
-    public static String timestamp() {
-        return new SimpleDateFormat("dd-MM--yyyy HH-mm-ss").format(new Date());
+    public String timestamp() {
+        return new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date());
     }
-
-
 }

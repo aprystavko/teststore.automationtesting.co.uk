@@ -6,10 +6,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pageObjects.*;
 
 import java.io.IOException;
+
+@Listeners(base.Listeners.class)
 
 public class AddRemoveItemBasketTest extends BasePage {
 
@@ -24,9 +27,17 @@ public class AddRemoveItemBasketTest extends BasePage {
     }
 
     @AfterTest
-    public void tearDown() {
-        driver.close();
-        driver = null;
+    public void afterTest() {
+        if (driver != null) {
+            try {
+                takeSnapShot("Test_Failure_Screenshot");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                driver.quit();
+                driver = null;
+            }
+        }
     }
 
     @Test
@@ -59,7 +70,7 @@ public class AddRemoveItemBasketTest extends BasePage {
         System.out.println(shoppingCart.getTotalAmountText());
         WebDriverWait wait = new WebDriverWait(driver, 120);
         wait.until(ExpectedConditions.invisibilityOf(shoppingCart.getDeleteItemTwo()));
-        Assert.assertEquals(shoppingCart.getTotalAmountText(), "$45.24");
+        Assert.assertEquals(shoppingCart.getTotalAmountText(), "$45.214");
     }
 
 }

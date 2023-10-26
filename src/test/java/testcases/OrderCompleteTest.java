@@ -3,10 +3,13 @@ package testcases;
 import base.BasePage;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pageObjects.*;
 
 import java.io.IOException;
+
+@Listeners(base.Listeners.class)
 
 public class OrderCompleteTest extends BasePage {
 
