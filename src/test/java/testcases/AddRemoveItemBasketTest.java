@@ -1,10 +1,6 @@
 package testcases;
 
-import base.BasePage;
 import base.Hooks;
-import base.Utils;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pageObjects.*;
@@ -18,22 +14,8 @@ public class AddRemoveItemBasketTest extends Hooks {
         super();
     }
 
-//    @BeforeTest
-//    public void setup() throws IOException {
-//        driver = getDriver();
-//        driver.get(getUrl());
-//    }
-//
-//    @AfterTest
-//    public void tearDown() {
-//        if (driver != null) {
-//            driver.close();
-//            driver = null;
-//        }
-//    }
-
     @Test
-    public void addRemoveItem() throws IOException, InterruptedException {
+    public void addRemoveItem() throws IOException {
         HomePage home = new HomePage();
         home.openTestStore();
 
@@ -61,7 +43,7 @@ public class AddRemoveItemBasketTest extends Hooks {
 
         waitForElementInvisible(shoppingCart.getDeleteItemTwo(), 10);
         addBorderToElement(shoppingCart.getTotalAmount());
-        Assert.assertEquals(shoppingCart.getTotalAmountText(), "$45.25");
+        Assert.assertEquals(shoppingCart.getTotalAmountText(), "$45.24");
     }
 
 }

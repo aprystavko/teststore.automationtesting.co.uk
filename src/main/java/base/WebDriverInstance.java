@@ -43,6 +43,10 @@ public class WebDriverInstance {
             options.addArguments("--disable-web-security");
             options.addArguments("--no-proxy-server");
 
+            options.addArguments("--disable-extensions");
+            options.addArguments("--disable-infobars");
+            options.addArguments("--disable-save-password-bubble");
+
             Map<String, Object> prefs = new HashMap<String, Object>();
             prefs.put("credentials_enable_service", false);
             prefs.put("profile.password_manager_enabled", false);
@@ -64,8 +68,10 @@ public class WebDriverInstance {
     }
 
     public static void cleanupDriver() {
-        driver.get().quit();
-        driver.remove();
+        if (driver != null) {
+            driver.get().quit();
+            driver.remove();
+        }
     }
 
 }
