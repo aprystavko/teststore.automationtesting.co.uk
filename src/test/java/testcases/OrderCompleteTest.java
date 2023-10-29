@@ -1,9 +1,6 @@
 package testcases;
 
-import base.BasePage;
 import base.Hooks;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pageObjects.*;

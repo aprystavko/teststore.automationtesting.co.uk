@@ -33,7 +33,7 @@ public class ExtendManager extends BasePage {
                 extentReportsPrefix_Name(testName) + ".html");
         extentReport.attachReporter(spark);
 
-        extentReport.setSystemInfo("Prystavko", "Alexey");
+        extentReport.setSystemInfo("QA", "Alexey Prystavko");
         spark.config().setReportName("Regression Test");
         spark.config().setDocumentTitle("Test Results");
         spark.config().setTheme(Theme.STANDARD);

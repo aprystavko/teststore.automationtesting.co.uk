@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class ActionsWithElement {
     public WebDriver driver;
+    Utils utils = new Utils();
 
     public boolean isCheckboxSelected(String checkboxLocator) {
         return driver.findElement(By.cssSelector(checkboxLocator)).isSelected();
@@ -24,7 +25,7 @@ public class ActionsWithElement {
         boolean checkboxStatus = checkbox.isSelected();
         if (!checkboxStatus) {
             checkbox.click();
-            System.out.println("Click on checkbox: " + checkbox);
+            System.out.println("Click on checkbox: " + utils.getStringWebElement(checkbox));
         } else {
             System.out.println("Can't click on checkbox");
         }
@@ -34,25 +35,26 @@ public class ActionsWithElement {
         String elementText = locator.getText();
         if (locator.isDisplayed()) {
             locator.click();
-            System.out.println("Click on element: " + locator + " With text: " + elementText);
+            System.out.println("Click on element " + "[" + utils.getStringWebElement(locator) + "]" + " with text " + "\"" +
+                    elementText + "\"");
         } else {
-            System.out.println("Can't click on element: " + locator);
+            System.out.println("Can't click on element " + "[" + utils.getStringWebElement(locator) + "]");
         }
     }
 
     public void selectMenuItem(WebElement menu, String menuItem) {
         Select option = new Select(menu);
         option.selectByVisibleText(menuItem);
-        System.out.println("Menu item is selected: " + menu + "with value: " + menuItem);
+        System.out.println("Menu item is selected " + "[" + utils.getStringWebElement(menu) + "]" + " with value " + "\"" + menuItem + "\"");
     }
 
     public void clickOnRadioButton(WebElement radioButton) {
         boolean radioButtonStatus = radioButton.isEnabled();
         if (radioButtonStatus) {
             radioButton.click();
-            System.out.println("Click on radio button: " + radioButton);
+            System.out.println("Click on radio button " + "[" + utils.getStringWebElement(radioButton) + "]");
         } else {
-            System.out.println("Can't click on clicked radio button: " + radioButton);
+            System.out.println("Can't click on radio button " + "[" + utils.getStringWebElement(radioButton) + "]");
         }
     }
 
@@ -61,9 +63,9 @@ public class ActionsWithElement {
             input.click();
             input.clear();
             input.sendKeys(value);
-            System.out.println("Added value: " + value + "into: " + input);
+            System.out.println("Added value " + "\"" + value + "\"" + " into " + "[" + utils.getStringWebElement(input) + "]");
         } else {
-            System.out.println("Can't add value: " + value + "into: " + input);
+            System.out.println("Can't add value " + "\"" + value + "\"" + "into " + "[" + utils.getStringWebElement(input) + "]");
         }
     }
 
