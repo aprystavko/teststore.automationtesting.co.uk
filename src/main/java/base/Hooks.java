@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 import java.io.IOException;
 
 public class Hooks extends BasePage {
+    public ExtendManager extendManager = new ExtendManager();
     public Hooks() throws IOException {
     }
 

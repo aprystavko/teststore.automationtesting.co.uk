@@ -1,5 +1,6 @@
 package base;
 
+import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
@@ -18,12 +19,25 @@ public class Listeners implements ITestListener {
     }
 
     @Override
+    public synchronized void onStart(ITestContext context) {
+        ExtendManager.getReport();
+        ExtendManager.createTest(context.getName(), context.getName());
+    }
+
+    @Override
     public void onTestFailure(ITestResult result) {
+        ExtendManager.getTest().fail(result.getThrowable());
         try {
-            basePage.takeSnapShot(result.getName());
+            System.out.println("Test failed: " + result.getName());
+            basePage.takeSnapShot(result.getMethod().getMethodName());
+            ExtendManager.attachImage();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public synchronized void onFinish(ITestContext context) {
+        ExtendManager.flushReport();
     }
 
 }
