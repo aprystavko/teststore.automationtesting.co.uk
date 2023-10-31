@@ -32,8 +32,7 @@ public class WebDriverInstance {
         WebDriver driver = null;
         ChromeOptions options = new ChromeOptions();
         Properties prop = new Properties();
-        FileInputStream data = new FileInputStream(
-                System.getProperty("user.dir") + "./src/test/resources/config.properties");
+        FileInputStream data = new FileInputStream(System.getProperty("user.dir") + "./src/test/resources/config.properties");
         prop.load(data);
 
         if (prop.getProperty("browser").equals("chrome")) {
@@ -46,16 +45,16 @@ public class WebDriverInstance {
             options.addArguments("--disable-extensions");
             options.addArguments("--disable-infobars");
             options.addArguments("--disable-save-password-bubble");
+//            options.addArguments("--incognito");
+//            disable password manager in chrome webdriver
+            options.addArguments("--guest");
 
             Map<String, Object> prefs = new HashMap<String, Object>();
             prefs.put("credentials_enable_service", false);
             prefs.put("profile.password_manager_enabled", false);
             options.setExperimentalOption("prefs", prefs);
 
-            options.setExperimentalOption("prefs", Map.of(
-                    "credentials_enable_service", false,
-                    "profile.password_manager_enabled", false
-            ));
+            options.setExperimentalOption("prefs", Map.of("credentials_enable_service", false, "profile.password_manager_enabled", false));
 
             options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
 

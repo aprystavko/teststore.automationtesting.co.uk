@@ -21,6 +21,7 @@ public class Question {
         options.addArguments("--start-maximized");
         options.addArguments("--disable-web-security");
         options.addArguments("--no-proxy-server");
+        options.addArguments("--guest");
 
         Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("credentials_enable_service", false);
